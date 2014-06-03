@@ -3,7 +3,7 @@ function() {
    'use strict';
 
    var PrimeFactorPrinter = function(separator) { 
-      this.Separator = separator;
+      this.Separator = separator || '';
       this.PrimeFactors = [];
    };
 
@@ -13,7 +13,7 @@ function() {
    PrimeFactorPrinter.prototype.PrintFor = function (number) {
       this.AddIfEvenNumber(number);
       this.AddIfOddNumber(number);
-      return this.PrimeFactors.join(', ');
+      return this.PrimeFactors.join(this.Separator);
    };
 
    PrimeFactorPrinter.prototype.IsEven = function(number) {
@@ -22,6 +22,10 @@ function() {
 
    PrimeFactorPrinter.prototype.IsOdd = function(number) {
       return (number % 2) !== 0;
+   }
+
+   PrimeFactorPrinter.prototype.DividesEvenly = function(numerator, denominator) {
+      return (numerator % denominator) === 0;
    }
 
    PrimeFactorPrinter.prototype.AddIfEvenNumber = function(number) {
@@ -33,6 +37,14 @@ function() {
 
    PrimeFactorPrinter.prototype.AddIfOddNumber = function(number) {
       if (this.IsOdd(number) && number >= 3) {
+         for (var i = 3; i < number; i+=2) {
+            if (this.DividesEvenly(number, i)) {
+               this.PrimeFactors.push(i);
+               this.PrintFor(number / i);
+               return;
+            };
+         };
+
          this.PrimeFactors.push(number);
       };
    }
