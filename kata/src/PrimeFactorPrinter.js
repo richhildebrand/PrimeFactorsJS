@@ -37,7 +37,8 @@ function() {
 
    PrimeFactorPrinter.prototype.AddIfOddNumber = function(number) {
       if (this.IsOdd(number) && number >= 3) {
-         for (var i = 3; i < number; i+=2) {
+         var squareRoot = Math.sqrt(number);
+         for (var i = 3; i <= squareRoot; i+=2) {
             if (this.DividesEvenly(number, i)) {
                this.PrimeFactors.push(i);
                this.PrintFor(number / i);
