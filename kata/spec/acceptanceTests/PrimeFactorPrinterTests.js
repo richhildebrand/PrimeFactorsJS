@@ -14,11 +14,18 @@ define(['Squire'], function(Squire) {
       });
 
       it('print two when given two', function() {
-         expect(false).to.be.false;
+         var primeFactors = primeFactorPrinter.PrintFor(2);
+         expect(primeFactors).to.equal('2');
       });
 
-      it('fail', function() {
-         expect(false).to.be.true;
+      it('print three when given three', function() {
+         var primeFactors = primeFactorPrinter.PrintFor(3);
+         expect(primeFactors).to.equal('3');
+      });
+
+      it('print 2, 2 when given four', function() {
+         var primeFactors = primeFactorPrinter.PrintFor(4);
+         expect(primeFactors).to.equal('2, 2');
       });
    });
 });
